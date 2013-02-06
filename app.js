@@ -1,14 +1,19 @@
 var express = require('express')
-  , app = express()
-  , server = require('http').createServer(app)
-  , io = require('socket.io').listen(server)
+  , http = require('http')
+  , socketio = require('socket.io')
   , sharejs = require('share').server;
 
-app.configure(function(){
-  app.use(express.static(__dirname + '/public'));
-});
+var app = express();
+var server = http.createServer(app);
 
-var options = {db: {type: 'none'}}; // See docs for options. {type: 'redis'} to enable persistance.
+socketio.listen(server);
+
+// Server static files from /public
+app.use(express.static(__dirname + '/public'));
+
+// See share.js docs for options. This is where you would enable redis
+// for persistence.
+var options = {db: {type: 'none'}};
 
 // Attach the sharejs REST and Socket.io interfaces to the server
 sharejs.attach(app, options);
