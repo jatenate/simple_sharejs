@@ -1,0 +1,9 @@
+{
+  "name": "sharejs_test",
+  "version": "0.0.1",
+  "dependencies": {
+    "share": "0.5.0",
+    "express": "latest",
+    "socket.io": "latest"
+  }
+}
